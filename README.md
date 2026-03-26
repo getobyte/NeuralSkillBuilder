@@ -90,8 +90,6 @@ When NVC integration is present, scaffold auto-generates `frameworks/nvc-tools.m
 ---
 
 ## Credits
-
-Based on [Skillsmith](https://github.com/ChristopherKahler/skillsmith) by Chris Kahler (MIT License).  
 Extended for the NeuralVault ecosystem by [getobyte](https://github.com/getobyte).
 
 ---
