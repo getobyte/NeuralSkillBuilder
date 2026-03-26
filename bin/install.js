@@ -9,7 +9,7 @@ const customConfigDir = (() => {
   const idx = args.indexOf('--config-dir');
   return idx !== -1 ? args[idx + 1] : null;
 })();
-const sourceDir = path.join(__dirname, '..', 'nvc-skill');
+const skillSource = path.join(__dirname, '..', 'nvc-skill');
 const specsSource = path.join(__dirname, '..', 'specs');
 let claudeDir;
 if (customConfigDir) {
@@ -38,10 +38,29 @@ console.log('Installing NeuralSkillBuilder...');
 console.log(`Location: ${isLocal ? 'local (.claude/)' : 'global (~/.claude/)'}`);
 console.log('');
 try {
-  copyRecursive(sourceDir, commandsDir);
+  // Copy only tasks/ directly into commands/nvc/ → /nvc:skill etc.
+  const tasksSource = path.join(skillSource, 'tasks');
+  copyRecursive(tasksSource, commandsDir);
+
+  // Entry point md
+  const entryPoint = path.join(skillSource, 'nvc-skill.md');
+  if (fs.existsSync(entryPoint)) {
+    fs.copyFileSync(entryPoint, path.join(commandsDir, 'nvc-skill.md'));
+  }
+
+  // Rules and templates outside commands/ → not exposed as slash commands
+  const assetsDir = path.join(claudeDir, 'nvc-skill-assets');
+  const rulesSource = path.join(skillSource, 'rules');
+  const templatesSource = path.join(skillSource, 'templates');
+  if (fs.existsSync(rulesSource))     copyRecursive(rulesSource,     path.join(assetsDir, 'rules'));
+  if (fs.existsSync(templatesSource)) copyRecursive(templatesSource, path.join(assetsDir, 'templates'));
+
+  // Specs outside commands/
   copyRecursive(specsSource, specsDir);
+
   console.log(`Skill installed to: ${commandsDir}`);
   console.log(`Specs installed to: ${specsDir}`);
+  console.log(`Assets installed to: ${assetsDir}`);
   console.log('');
   console.log('NeuralSkillBuilder installed successfully.');
   console.log('Open Claude Code and type /nvc:skill to start.');
