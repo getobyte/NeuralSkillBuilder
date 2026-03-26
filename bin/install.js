@@ -1,21 +1,16 @@
 #!/usr/bin/env node
-
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
-
 const args = process.argv.slice(2);
 const isLocal = args.includes('--local');
 const isGlobal = args.includes('--global') || !isLocal;
-
 const customConfigDir = (() => {
   const idx = args.indexOf('--config-dir');
   return idx !== -1 ? args[idx + 1] : null;
 })();
-
 const sourceDir = path.join(__dirname, '..', 'nvc-skill');
 const specsSource = path.join(__dirname, '..', 'specs');
-
 let claudeDir;
 if (customConfigDir) {
   claudeDir = customConfigDir;
@@ -24,10 +19,8 @@ if (customConfigDir) {
 } else {
   claudeDir = path.join(os.homedir(), '.claude');
 }
-
-const commandsDir = path.join(claudeDir, 'commands', 'nvc-skill');
+const commandsDir = path.join(claudeDir, 'commands', 'nvc');
 const specsDir = path.join(claudeDir, 'nvc-skill-specs');
-
 function copyRecursive(src, dest) {
   if (!fs.existsSync(dest)) fs.mkdirSync(dest, { recursive: true });
   const entries = fs.readdirSync(src, { withFileTypes: true });
@@ -41,15 +34,12 @@ function copyRecursive(src, dest) {
     }
   }
 }
-
 console.log('Installing NeuralSkillBuilder...');
 console.log(`Location: ${isLocal ? 'local (.claude/)' : 'global (~/.claude/)'}`);
 console.log('');
-
 try {
   copyRecursive(sourceDir, commandsDir);
   copyRecursive(specsSource, specsDir);
-
   console.log(`Skill installed to: ${commandsDir}`);
   console.log(`Specs installed to: ${specsDir}`);
   console.log('');
