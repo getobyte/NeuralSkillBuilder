@@ -1,0 +1,25 @@
+{
+  "name": "@getobyte/neural-skill-builder",
+  "version": "0.1.0",
+  "description": "Build consistent NeuralVault-integrated Claude Code skills using standardized syntax and guided workflows",
+  "bin": {
+    "neural-skill-builder": "./bin/install.js"
+  },
+  "scripts": {
+    "install-global": "node bin/install.js --global",
+    "install-local": "node bin/install.js --local"
+  },
+  "keywords": [
+    "claude-code",
+    "mcp",
+    "neural-vault",
+    "skills",
+    "ai-agents",
+    "skillsmith"
+  ],
+  "license": "MIT",
+  "author": "getobyte",
+  "engines": {
+    "node": ">=16"
+  }
+}
