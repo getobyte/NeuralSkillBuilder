@@ -13,12 +13,11 @@ Meta-skill for creating, scaffolding, and auditing Claude Code skills — with b
 ## 🚀 Install
 
 ```bash
-npx @getobyte/neural-skill-builder
-```
+# Global — available in every workspace (recommended)
+npx github:getobyte/NeuralSkillBuilder --global
 
-```bash
-npx @getobyte/neural-skill-builder --global   # available in every workspace
-npx @getobyte/neural-skill-builder --local    # current project only
+# Local — current project only
+npx github:getobyte/NeuralSkillBuilder --local
 ```
 
 Then open Claude Code and type `/nvc:skill`.
@@ -86,10 +85,13 @@ When NVC integration is present, scaffold auto-generates `frameworks/nvc-tools.m
 | ⚡ [**NeuralVaultSkill**](https://github.com/getobyte/NeuralVaultSkill) | Session memory automation — `/nvc:init` + `/nvc:end` |
 | 🧹 [**NeuralVaultArchivist**](https://github.com/getobyte/NeuralVaultArchivist) | Memory consolidation — on-demand cleanup |
 | 🛠️ **NeuralSkillBuilder** *(you are here)* | Skill builder — design, scaffold, audit |
+| 🔄 [**NeuralVaultFlow**](https://github.com/getobyte/NeuralVaultFlow) | Dev workflow — brainstorm to deploy |
 
 ---
 
 ## Credits
+
+Based on [Skillsmith](https://github.com/ChristopherKahler/skillsmith) by Chris Kahler (MIT License).  
 Extended for the NeuralVault ecosystem by [getobyte](https://github.com/getobyte).
 
 ---
